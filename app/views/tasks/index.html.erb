@@ -1,0 +1,12 @@
+<h1>Task Management</h1>
+<div>
+<%= @tasks.each do |task| %>
+  <%= task.title %>
+  <%= task.content %>
+  <%= task.label.pripority %>
+  <%= task.label.status %>
+  <%= task.label.category1 %>
+  <%= task.label.category2 %>
+  <%= task.label.category3 %>
+<% end %>
+</div>
