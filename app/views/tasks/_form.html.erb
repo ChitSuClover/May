@@ -1,0 +1,23 @@
+<div>
+  <%= form_with(model: @task, local: true, url: choose_new_or_edit) do |f| %>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %><br>
+    <%= f.label :content %><br>
+    <%= f.text_field :content %><br>
+
+    <%= f.fields_for :labels do |lab| %>
+    <%= lab.hidden_field :id %>
+    <%= lab.check_box :pripority, {}, true, false%>
+    <%= f.label :pripority, "Important!" %><br>
+    <%= lab.check_box :status, {}, true, false %>
+    <%= f.label :status, "Done!" %><br>
+    <%= lab.check_box :category1, {}, true, false %>
+    <%= f.label :category1, "Web_App"  %><br>
+    <%= lab.check_box :category2, {}, true, false %>
+    <%= f.label :category3, "Graphic Design" %><br>
+    <%= lab.check_box :category3, {}, true, false %>
+    <%= f.label :category3, "POS" %><br>
+    <% end %>
+    <%= f.submit%>
+  <% end %>
+</div>
