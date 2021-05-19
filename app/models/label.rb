@@ -1,3 +1,3 @@
 class Label < ApplicationRecord
-  belongs_to :task, dependent: :destroy
+  belongs_to :task, dependent: :delete
 end

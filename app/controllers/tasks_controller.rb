@@ -10,13 +10,18 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     if @task.save
-      redirect_to tasks_path, notice: "TASK created!"
+      redirect_to tasks_path, notice: "TASK Created!"
     else
       render :new
     end
   end
+  def show
+    @label = Label.where(task_id: params[:id])
+  end
   def edit
-    @task.labels.build
+    @label = Label.where(task_id: params[:id])
+    @label.pripority = false
+    @label.save
   end
   def update
     if @task.update_attributes(task_params)
@@ -25,8 +30,10 @@ class TasksController < ApplicationController
       render :new
     end
   end
-  def show
-    @label = Label.where(task_id: params[:id])
+  def destroy
+    @label = Label.find_by(task_id: params[:id])
+    @label.destroy
+    redirect_to tasks_path, notice: "TASK Deleted!"
   end
   private
   def set_task
