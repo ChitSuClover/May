@@ -5,7 +5,7 @@ class TasksController < ApplicationController
   end
   def new
     @task = Task.new
-    @task.labels.build
+    @label = Label.all
   end
   def create
     @task = Task.new(task_params)
@@ -19,9 +19,6 @@ class TasksController < ApplicationController
     @label = Label.where(task_id: params[:id])
   end
   def edit
-    @label = Label.where(task_id: params[:id])
-    @label.pripority = false
-    @label.save
   end
   def update
     if @task.update_attributes(task_params)
@@ -40,6 +37,6 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
   end
   def task_params
-    params.require(:task).permit(:title, :content, labels_attributes: %i[id pripority status category1 category2 category3 _destroy])
+    params.require(:task).permit(:title, :content, label_ids: [])
   end
 end
