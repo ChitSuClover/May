@@ -28,8 +28,7 @@ class TasksController < ApplicationController
     end
   end
   def destroy
-    @label = Label.find_by(task_id: params[:id])
-    @label.destroy
+    @task.destroy
     redirect_to tasks_path, notice: "TASK Deleted!"
   end
   private

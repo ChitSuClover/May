@@ -1,0 +1,6 @@
+my:
+  activerecord:
+    attributes:
+      task:
+        title: ခေါင်းစဉ်
+        content: အကြောင်းအရာ
