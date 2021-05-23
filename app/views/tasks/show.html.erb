@@ -3,16 +3,5 @@
   <%= @task.title %></p>
 <p><strong>Content:</strong>
   <%= @task.content %></p>
-<p><strong>
-  <% @label.each do |l| %>
-  Label:
-    <%= l.pripority %>
-    <%= l.status %>
-    <%= l.category1 %>
-    <%= l.category2 %>
-    <%= l.category3 %>
-  <% end %>
-</strong>
-</p>
 <%= link_to 'Edit', edit_task_path(@task.id), data: {confirm: "Confirm Edit!"} %>
 <%= link_to 'HOME', tasks_path %>

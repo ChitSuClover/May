@@ -19,8 +19,8 @@
 ##Labels Table
 |model  |column   |data_type |
 |:------|:------  |:------   |
-|label  |important|string    |
-|       |done     |string    |
+|label  |pripority|string    |
+|       |status   |string    |
 |       |web_app  |string    |
 |       |design   |string    |
 |       |pos      |string    |
