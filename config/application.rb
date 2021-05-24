@@ -7,6 +7,8 @@ Bundler.require(*Rails.groups)
 module May
   class Application < Rails::Application
     config.load_defaults 5.2
+    config.assets.initialize_on_precompile = false
+    config.time_zone = 'Rangoon'
     config.generators do |g|
       g.test_framework :rspec,
                    model_specs: true,

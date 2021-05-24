@@ -2,6 +2,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:edit, :show, :destroy, :update]
   def index
     @tasks = Task.all
+    @tasks = @tasks.order(:created_at)
   end
   def new
     @task = Task.new

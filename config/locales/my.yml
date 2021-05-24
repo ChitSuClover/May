@@ -1,0 +1,6 @@
+---
+my:
+  activerecord:
+  errors:
+    messages:
+      blank: 'ဖြည့်ပါ'
