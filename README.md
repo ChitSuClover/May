@@ -26,6 +26,10 @@
 |       |pos      |string    |
 
 ##Deployment
-Delete gem uglifier
+- Create App on Heroku
 
-Add [config.assets.precompile = ['*.js', '*.css', '*.css.erb'] ] to production environment.
+- Delete gem uglifier
+
+- Add config.assets.precompile = ['*.js', '*.css', '*.css.erb'] to production environment.
+
+- Do precompile
