@@ -24,3 +24,8 @@
 |       |web_app  |string    |
 |       |design   |string    |
 |       |pos      |string    |
+
+##Deployment
+Delete gem uglifier
+
+Add [config.assets.precompile = ['*.js', '*.css', '*.css.erb'] ] to production environment.
