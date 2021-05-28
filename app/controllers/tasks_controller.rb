@@ -36,6 +36,6 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
   end
   def task_params
-    params.require(:task).permit(:title, :content, label_ids: [])
+    params.require(:task).permit(:title, :content,:expired_at, label_ids: [])
   end
 end

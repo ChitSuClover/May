@@ -10,15 +10,7 @@
   <tr>
     <td><%= task.title %></td>
     <td><%= task.content %></td>
-    <td>
-      <% task.labels.each do |label| %>
-        <% if label.pripority %>!Important <% end %>
-        <% if label.status %> Done! <% end %>
-        <% if label.category1 %> Web_App <% end %>
-        <% if label.category2 %> Graphic Design <% end %>
-        <% if label.category3 %> POS <% end %>
-      <% end %>
-    </td>
+    <td><%= task.expired_at %></td>
     <td>
       <%= link_to 'Show', task_path(task.id) %>
       <%= link_to 'Edit', edit_task_path(task.id), data: {confirm: "Confirm Edit!"} %>
