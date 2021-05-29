@@ -6,6 +6,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         visit new_task_path
         fill_in 'task[title]', with: 'new_title'
         fill_in 'task[content]', with: 'new_content'
+        fill_in 'task[expired_at]', with: (Time.now)
         click_on 'Create Task'
         visit tasks_path
         expect(page).to have_content 'new_title'
@@ -17,9 +18,6 @@ RSpec.describe 'タスク管理機能', type: :system do
       it '作成済みのタスク一覧が表示される' do
         task = FactoryBot.create(:task, title: 'task')
         visit tasks_path
-        binding.irb
-        current_path
-        Task.count
         page.html
         expect(page).to have_content 'task'
       end
