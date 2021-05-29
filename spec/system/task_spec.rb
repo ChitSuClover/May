@@ -1,5 +1,7 @@
 require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
+  let!(:task) { FactoryBot.create(:task)}
+  let!(:task2) { FactoryBot.create(:task, expired_at: Time.current+2.days)}
   describe '新規作成機能' do
     context 'タスクを新規作成した場合' do
       it '作成したタスクが表示される' do
@@ -14,9 +16,8 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
     context 'タスクを終了期限でソートする場合' do
       it '終了期限でソートする' do
-        task = FactoryBot.create(:task)
-        task_order = FactoryBot.create(:task_order)
-        Task.order('expired_at desc').all.should == [task_order, task]
+        visit tasks_path
+        Task.order('expired_at').all.should == [task, task2]
       end
     end
   end

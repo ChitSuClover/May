@@ -2,11 +2,6 @@ FactoryBot.define do
   factory :task do
     title { 'test_title' }
     content { 'test_content' }
-    expired_at {'2021.6.7'}
-  end
-  factory :task_order do
-    title { 'test_title' }
-    content { 'test_content' }
-    expired_at {'2021.6.1'}
+    expired_at {Time.current+1.days}
   end
 end
