@@ -12,6 +12,13 @@ RSpec.describe 'タスク管理機能', type: :system do
         expect(page).to have_content 'new_title'
       end
     end
+    context 'タスクを終了期限でソートする場合' do
+      it '終了期限でソートする' do
+        task = FactoryBot.create(:task)
+        task_order = FactoryBot.create(:task_order)
+        Task.order('expired_at desc').all.should == [task_order, task]
+      end
+    end
   end
   describe '一覧表示機能' do
     context '一覧画面に遷移した場合' do
