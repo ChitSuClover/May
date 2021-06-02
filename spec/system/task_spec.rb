@@ -9,6 +9,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         fill_in 'task[title]', with: 'new_title'
         fill_in 'task[content]', with: 'new_content'
         fill_in 'task[expired_at]', with: (Time.now)
+        find_field ('task[status]')
         click_on 'Create Task'
         visit tasks_path
         expect(page).to have_content 'new_title'
@@ -35,8 +36,41 @@ RSpec.describe 'タスク管理機能', type: :system do
      context '任意のタスク詳細画面に遷移した場合' do
        it '該当タスクの内容が表示される' do
          task = FactoryBot.create(:task, title: 'task')
+         visit tasks_path
          expect(page).to have_content 'task'
        end
      end
+  end
+  describe '検索機能' do
+    before do
+      FactoryBot.create(:task, title: "task", status: "unstarted")
+      FactoryBot.create(:task, title: "sample", status: "completed")
+    end
+    context 'タイトルであいまい検索をした場合' do
+      it "検索キーワードを含むタスクで絞り込まれる" do
+        visit tasks_path
+        fill_in 'title', with: 'task'
+        click_button('search')
+        expect(page).to have_content ''
+      end
+    end
+    context 'ステータス検索をした場合' do
+      it "ステータスに完全一致するタスクが絞り込まれる" do
+        visit tasks_path
+        select ('completed')
+        click_button('search')
+        expect(page).to have_content 'completed'
+      end
+    end
+    context 'タイトルのあいまい検索とステータス検索をした場合' do
+      it "検索キーワードをタイトルに含み、かつステータスに完全一致するタスク絞り込まれる" do
+        visit tasks_path
+        fill_in 'title', with: 'task'
+        select ('unstarted')
+        click_button('search')
+        expect(page).to have_content ('task')
+        expect(page).to have_content ('unstarted')
+      end
+    end
   end
 end

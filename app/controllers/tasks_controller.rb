@@ -5,7 +5,14 @@ class TasksController < ApplicationController
       params[:expired_at]
       @tasks = Task.all.order(expired_at: :desc)
     else
-      @tasks = Task.all
+     @tasks = Task.all
+    end
+  end
+  def search
+    if params[:title].present? || params[:status].present?
+      @tasks = Task.search(params[:title], params[:status])
+    else
+      redirect_to tasks_path
     end
   end
   def new
@@ -41,6 +48,6 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
   end
   def task_params
-    params.require(:task).permit(:title, :content,:expired_at, label_ids: [])
+    params.require(:task).permit(:title, :content,:expired_at, :status, label_ids: [])
   end
 end
