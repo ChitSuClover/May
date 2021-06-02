@@ -31,6 +31,13 @@ RSpec.describe 'タスク管理機能', type: :system do
         expect(page).to have_content 'task'
       end
     end
+    context '一覧画面に遷移した場合' do
+      it 'ページネーションを追加する' do
+        visit tasks_path
+        expect{ find_link('2', rel="prev").click }
+        expect{ find_link('1', rel="next").click }
+      end
+    end
   end
   describe '詳細表示機能' do
      context '任意のタスク詳細画面に遷移した場合' do
@@ -40,6 +47,15 @@ RSpec.describe 'タスク管理機能', type: :system do
          expect(page).to have_content 'task'
        end
      end
+  end
+  describe '優先順位' do
+    context '優先順位でソートするというリンクを押す場合' do
+      it '優先順位の高い順に並び替えられたタスク一覧が表示される' do
+        visit tasks_path
+        click_link ('Sort By Deadline')
+        Task.order('expired_at').all.should == [task, task2]
+      end
+    end
   end
   describe '検索機能' do
     before do
@@ -51,7 +67,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         visit tasks_path
         fill_in 'title', with: 'task'
         click_button('search')
-        expect(page).to have_content ''
+        expect(page).to have_content 'task'
       end
     end
     context 'ステータス検索をした場合' do

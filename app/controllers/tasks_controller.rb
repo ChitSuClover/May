@@ -3,9 +3,9 @@ class TasksController < ApplicationController
   def index
     if
       params[:expired_at]
-      @tasks = Task.all.order(expired_at: :desc)
+      @tasks = Task.all.order(expired_at: :desc).page(params[:page]).per(5)
     else
-     @tasks = Task.all
+      @tasks = Task.all.page(params[:page]).per(5)
     end
   end
   def search
