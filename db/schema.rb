@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_03_074738) do
+ActiveRecord::Schema.define(version: 2021_06_03_150528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,8 +32,20 @@ ActiveRecord::Schema.define(version: 2021_06_03_074738) do
     t.date "expired_at", default: "2021-05-28", null: false
     t.integer "status"
     t.integer "pripority"
+    t.bigint "user_id"
     t.index ["title", "content", "expired_at", "status"], name: "index_tasks_on_title_and_content_and_expired_at_and_status"
+    t.index ["user_id"], name: "index_tasks_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "password_digest"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   add_foreign_key "labels", "tasks"
+  add_foreign_key "tasks", "users"
 end
