@@ -1,3 +1,63 @@
-// Place all the styles related to the tasks controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+body{
+  background-color: #fff;
+  font-family: Lora;
+  font-size: 1em;
+}
+.task_index_pg{
+  background-color: #F9F5EC;
+  width:1200px;
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 100%;
+  padding: 20px;
+}
+h1{
+  font-family: Cambria;
+  color: #1B4750;
+  text-align: center;
+}
+.link{
+  background-color: #F9F5EC;
+  border-radius: 5px;
+  border: 1px solid #2E0F2C;
+  padding: 5px 10px;
+  color: #000;
+  text-decoration: none;
+}
+.link:hover{
+  color: #fff;
+  background-color: #2E0F2C;
+}
+.link_top, .submit_btn{
+  background-color: #2E0F2C;
+  border-radius: 5px;
+  border: 1px solid #F9F5EC;
+  padding: 5px 10px;
+  color: #fff;
+  text-decoration: none;
+}
+.link_top:hover,.submit_btn:hover{
+  color: #000;
+  background-color: #F9F5EC;
+  border: 1px solid #2E0F2C;
+}
+
+p{
+  padding: 5px 10px;
+  font-size: 25px;
+}
+tr{
+  height: 40px;
+}
+td{
+  width: 200px;
+  margin: 10px;
+}
+.task_new_pg, .task_show_pg{
+  background-color: #F9F5EC;
+  width:500px;
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 100%;
+  padding: 20px;
+}
