@@ -18,6 +18,7 @@
     <%= f.label :expired_at %><br>
     <%= f.text_field :expired_at %><br>
     <%= f.select :status, Task.statuses.keys.map{|s|[s,s]}, include_blank: "Select Status" %><br>
+    <%= f.select :pripority, Task.priporities.keys.map{|p|[p,p]}, include_blank: "Select pripority" %><br>
     <%= f.submit 'submit', class:"submit_btn"%>
   <% end %>
 </div>

@@ -1,7 +1,7 @@
 require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
-  let!(:task) { FactoryBot.create(:task)}
-  let!(:task2) { FactoryBot.create(:task, expired_at: Time.current+2.days)}
+  let!(:task) { FactoryBot.create(:task, pripority: 'high')}
+  let!(:task2) { FactoryBot.create(:task, expired_at: Time.current+2.days, pripority: 'low')}
   describe '新規作成機能' do
     context 'タスクを新規作成した場合' do
       it '作成したタスクが表示される' do
@@ -10,7 +10,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         fill_in 'task[content]', with: 'new_content'
         fill_in 'task[expired_at]', with: (Time.now)
         find_field ('task[status]')
-        click_on 'Create Task'
+        click_on 'submit'
         visit tasks_path
         expect(page).to have_content 'new_title'
       end
@@ -52,8 +52,8 @@ RSpec.describe 'タスク管理機能', type: :system do
     context '優先順位でソートするというリンクを押す場合' do
       it '優先順位の高い順に並び替えられたタスク一覧が表示される' do
         visit tasks_path
-        click_link ('Sort By Deadline')
-        Task.order('expired_at').all.should == [task, task2]
+        click_link ('Sort By Pripority')
+        Task.order('pripority').all.should == [task, task2]
       end
     end
   end

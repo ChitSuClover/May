@@ -7,6 +7,11 @@ class Task < ApplicationRecord
     in_progress: 1,
     completed: 2
   }
+  enum pripority: {
+    high: 0,
+    medium: 1,
+    low: 2
+  }
   scope :search, ->(title, status) do
     @title = title
     @status = status

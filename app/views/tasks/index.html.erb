@@ -2,7 +2,8 @@
 <h1>Task Management</h1>
 <%= link_to 'HOME', tasks_path, class:"link_top" %>
 <%= link_to 'NEW Task', new_task_path, class:"link_top" %>
-<%= link_to 'Sort By Deadline', tasks_path(expired_at: "true"), class:"link_top"%>
+<%= link_to 'Sort By Expire', tasks_path(expired_at: "true"), class:"link_top"%>
+<%= link_to 'Sort By Pripority', tasks_path(pripority: "true"), class:"link_top"%>
 <p><strong>Search by TITLE </strong></p>
 <%= form_with(url: search_path, method: :get, local: true) do |f| %>
   <%= f.text_field :title, placeholder: "title search" %>
@@ -14,8 +15,9 @@
   <tr>
     <th>Title</th>
     <th>Content</th>
-    <th>Label</th>
+    <th>Expired at</th>
     <th>Status</th>
+    <th>Pripority</th>
   </tr>
 <% @tasks.each do |task| %>
   <tr>
@@ -23,6 +25,7 @@
     <td><%= task.content %></td>
     <td><%= task.expired_at %></td>
     <td><%= task.status %></td>
+    <td><%= task.pripority %></td>
     <td>
       <%= link_to 'Show', task_path(task.id), class:"link" %>
       <%= link_to 'Edit', edit_task_path(task.id), data: {confirm: "Confirm Edit!"}, class:"link" %>

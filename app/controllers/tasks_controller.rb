@@ -4,7 +4,10 @@ class TasksController < ApplicationController
     if
       params[:expired_at]
       @tasks = Task.all.order(expired_at: :desc).page(params[:page]).per(5)
-    else
+    elsif
+      params[:pripority]
+      @tasks = Task.all.order(pripority: :asc).page(params[:page]).per(5)
+    elsif
       @tasks = Task.all.page(params[:page]).per(5)
     end
   end
@@ -48,6 +51,6 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
   end
   def task_params
-    params.require(:task).permit(:title, :content,:expired_at, :status, label_ids: [])
+    params.require(:task).permit(:title, :content,:expired_at, :status, :pripority, label_ids: [])
   end
 end
