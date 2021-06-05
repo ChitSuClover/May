@@ -15,6 +15,17 @@
       <%= content_tag(:div,value,class:"#{key}") %>
     <% end %>
     </div>
+    <div align="center">
+    <% if logged_in? %>
+      <%= link_to "Logout |", session_path(current_user.id), method: :delete%>
+      <%= link_to "Create Account |", new_user_path%>
+      <%= link_to 'Home |', tasks_path%>
+      <%= link_to 'Profile', user_path(current_user.id) %>
+    <% else %>
+      <%= link_to "Log In |", new_session_path%>
+      <%= link_to "Create Account", new_user_path%>
+    <% end %>
+  </div>
     <%= yield %>
   </body>
 </html>

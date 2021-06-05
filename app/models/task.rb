@@ -1,6 +1,6 @@
 class Task < ApplicationRecord
   has_many :labels
-  belong_to :user
+  belongs_to :user
   validates :title, presence: true
   validates :content, presence: true
   enum status:{

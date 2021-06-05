@@ -8,7 +8,7 @@ class TasksController < ApplicationController
       params[:pripority]
       @tasks = Task.all.order(pripority: :asc).page(params[:page]).per(5)
     elsif
-      @tasks = Task.all.page(params[:page]).per(5)
+      @tasks = Task.where(user_id: current_user.id).page(params[:page]).per(5)
     end
   end
   def search
@@ -23,7 +23,7 @@ class TasksController < ApplicationController
     @label = Label.all
   end
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.new(task_params)
     if @task.save
       redirect_to tasks_path, notice: "TASK Created!"
     else
