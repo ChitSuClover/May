@@ -40,6 +40,8 @@ before_action :set_user, only: [:show,:update, :destroy]
       render :edit
     end
   end
+  def show
+  end
   def destroy
     @user.destroy
     redirect_to admin_users_path

@@ -25,11 +25,11 @@ ActiveRecord::Schema.define(version: 2021_06_06_095615) do
   end
 
   create_table "tasks", force: :cascade do |t|
-    t.text "title", null: false
+    t.string "title", null: false
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.date "expired_at", default: "2021-05-28", null: false
+    t.date "expired_at", default: "2021-06-10", null: false
     t.integer "status"
     t.integer "pripority"
     t.bigint "user_id"
