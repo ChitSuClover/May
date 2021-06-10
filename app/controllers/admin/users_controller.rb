@@ -6,7 +6,7 @@ before_action :set_user, only: [:show,:update, :destroy]
       @users = User.all
     else
       flash[:notice]="管理者以外はアクセスできない"
-      redirect_to tasks_path
+      render :file => "public/401.html", :status => :unauthorized
     end
   end
   def new
