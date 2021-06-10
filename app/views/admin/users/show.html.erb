@@ -1,0 +1,23 @@
+<h2>Profile</h2>
+<div>
+  <p>Name: <%= @user.name %></p>
+
+  <table>
+    <tr>
+      <th>Title</th>
+      <th>Content</th>
+      <th>Expired at</th>
+      <th>Status</th>
+      <th>Pripority</th>
+    </tr>
+  <% @user.tasks.each do |task| %>
+    <tr>
+      <td><%= task.title %></td>
+      <td><%= task.content %></td>
+      <td><%= task.expired_at %></td>
+      <td><%= task.status %></td>
+      <td><%= task.pripority %></td>
+    </tr>
+  <% end %>
+  </table>
+</div>

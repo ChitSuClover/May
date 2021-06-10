@@ -1,0 +1,21 @@
+<h2>Create Admin Account</h2>
+<% if @user.errors.any? %>
+  <div id="error_explanation">
+    <h3 align="center"><%= pluralize(@user.errors.count, "error")%></h3>
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+<% end %>
+  </div>
+<div>
+  <%= form_with(model: @user, local: true, url: admin_user_new_or_edit) do |f| %>
+    <%= f.text_field :name, placeholder: "Name"%><br>
+    <%= f.text_field :email, placeholder: "Email"%><br>
+    <%= f.password_field :password, placeholder: "Password", class:"new_post"%><br>
+    <%= f.password_field :password_confirmation, placeholder: "Password Confirmation"%><br>
+    <%= f.select :role, User.roles.keys.map{|r|[r,r]}, include_blank: "select role" %><br>
+    <%= f.submit %>
+    <% end %>
+</div>
