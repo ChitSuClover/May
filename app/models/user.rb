@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   before_destroy :last_admin, prepend: true
   has_many :tasks, dependent: :destroy
+  has_many :labels, dependent: :destroy
   validates :name ,presence: true, length: {maximum: 50}
   validates :email ,presence: true, length: {maximum: 255},:uniqueness => {:allow_blank => true}, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }, on: :create
   before_validation {email.downcase!}

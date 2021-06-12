@@ -1,0 +1,5 @@
+<%= link_to 'NEW Label', new_label_path, class:"link_top" %><br>
+<% @labels.each do |label| %>
+  <%= label.name %>
+  <%= link_to 'Delete', label_path(label.id), method: :delete, data: {confirm: "Confirm Delete!"} %><br>
+<% end %>

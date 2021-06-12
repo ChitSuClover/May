@@ -2,12 +2,15 @@
 <h1>Task Management</h1>
 <%= link_to 'HOME', tasks_path, class:"link_top" %>
 <%= link_to 'NEW Task', new_task_path, class:"link_top" %>
-<%= link_to 'Sort By Expire', tasks_path(expired_at: "true"), class:"link_top"%>
-<%= link_to 'Sort By Pripority', tasks_path(pripority: "true"), class:"link_top"%>
+<%= link_to 'Sort By Expire', tasks_path(expired_at: "true"), class:"link_top" %>
+<%= link_to 'Sort By Pripority', tasks_path(pripority: "true"), class:"link_top" %>
+<%= link_to 'Label', labels_path, class:"link_top" %>
+
 <p><strong>Search by TITLE </strong></p>
 <%= form_with(url: search_path, method: :get, local: true) do |f| %>
   <%= f.text_field :title, placeholder: "title search" %>
   <%= f.select :status, Task.statuses.keys.to_a, include_blank: "Select Status"%>
+  <%= f.select :label_id, Label.pluck(:name, :id),  include_blank: "Select Label" %>
   <%= f.submit 'search', class:"submit_btn"%>
 <% end %>
 
@@ -18,6 +21,8 @@
     <th>Expired at</th>
     <th>Status</th>
     <th>Pripority</th>
+    <th>Label </th>
+    <th></th>
   </tr>
 <% @tasks.each do |task| %>
   <tr>
@@ -26,6 +31,11 @@
     <td><%= task.expired_at %></td>
     <td><%= task.status %></td>
     <td><%= task.pripority %></td>
+    <td>
+      <% task.labels.each do |label| %>
+        <%= label.name %>
+      <% end %>
+    </td>
     <td>
       <%= link_to 'Show', task_path(task.id), class:"link" %>
       <%= link_to 'Edit', edit_task_path(task.id), data: {confirm: "Confirm Edit!"}, class:"link" %>

@@ -1,5 +1,5 @@
 <div>
-  <%= form_with(model: @label, local: true, url: new_label_path) do |l| %>
+  <%= form_with(model: @label, local: true, url: labels_path) do |l| %>
     <%= l.label :name %><br>
     <%= l.text_field :name %><br>
     <%= l.submit%>
