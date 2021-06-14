@@ -13,7 +13,7 @@ class TasksController < ApplicationController
   end
   def search
     if params[:title].present? || params[:status].present? || params[:label_id].present?
-      @tasks = Task.search(params[:title], params[:status], params[:label_id])
+      @tasks = Task.where(user_id: current_user.id).search(params[:title], params[:status], params[:label_id])
     else
       redirect_to tasks_path
     end

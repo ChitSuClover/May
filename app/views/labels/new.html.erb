@@ -2,6 +2,6 @@
   <%= form_with(model: @label, local: true, url: labels_path) do |l| %>
     <%= l.label :name %><br>
     <%= l.text_field :name %><br>
-    <%= l.submit%>
+    <%= l.submit 'Create label'%>
   <% end %>
 </div>
