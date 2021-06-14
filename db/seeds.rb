@@ -1,4 +1,4 @@
-User.create!(name: 'Ha Ha', email: "haha@email.com", role: "user")
+User.create!(name: 'Ha Ha', email: "haha@email.com", password: "password",role: "user")
 User.create!(name: 'User_Admin', email: "useradmin@email.com", password: "password",role: "admin")
 User.create!(name: 'user3', email: "user3@email.com", password: "password",role: "user")
 User.create!(name: 'user4', email: "user4@email.com", password: "password",role: "user")
