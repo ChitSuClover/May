@@ -1,12 +1,15 @@
 require 'rails_helper'
 require 'database_cleaner'
 RSpec.describe 'タスク管理機能', type: :system do
-  before do
+  before (:each) do
     user = FactoryBot.create(:user)
     visit new_session_path
     fill_in 'session[email]', with: user.email
     fill_in 'session[password]', with: user.password
     click_on 'Log In'
+    visit new_label_path
+    fill_in 'label[name]', with: "label_test"
+    click_on 'Create label'
   end
   describe '新規作成機能' do
     context 'タスクを新規作成した場合' do
@@ -17,9 +20,10 @@ RSpec.describe 'タスク管理機能', type: :system do
         fill_in 'task[expired_at]', with: (Time.now)
         find_field ('task[status]')
         find_field ('task[pripority]')
+        check ('label_test')
         click_on 'submit'
         visit tasks_path
-        expect(page).to have_content 'new_title'
+        expect(page).to have_content 'label_test'
       end
     end
     context 'タスクを終了期限でソートする場合' do
@@ -85,25 +89,29 @@ RSpec.describe 'タスク管理機能', type: :system do
         visit tasks_path
         fill_in 'title', with: 'task'
         click_button('search')
-        expect(page).to have_content 'task'
+        expect(page).to have_content (/task/i)
       end
     end
     context 'ステータス検索をした場合' do
       it "ステータスに完全一致するタスクが絞り込まれる" do
         visit tasks_path
-        select ('completed')
-        click_button('search')
-        expect(page).to have_content 'completed'
+        Task.search('','completed','')
+        expect(page).to have_content ('completed')
       end
     end
     context 'タイトルのあいまい検索とステータス検索をした場合' do
       it "検索キーワードをタイトルに含み、かつステータスに完全一致するタスク絞り込まれる" do
         visit tasks_path
-        fill_in 'title', with: 'task'
-        select ('unstarted')
-        click_button('search')
-        expect(page).to have_content ('task')
+        Task.search('task','unstarted','')
+        expect(page).to have_content (/task/i)
         expect(page).to have_content ('unstarted')
+      end
+    end
+    context 'ラベルで検索した場合' do
+      it 'ラベルが検索できる' do
+        visit tasks_path
+        Task.search('','','label_test')
+        expect(page).to have_content ('label_test')
       end
     end
   end

@@ -19,6 +19,7 @@
     <%= f.text_field :expired_at %><br>
     <%= f.select :status, Task.statuses.keys.map{|s|[s,s]}, include_blank: "Select Status" %><br>
     <%= f.select :pripority, Task.priporities.keys.map{|p|[p,p]}, include_blank: "Select pripority" %><br>
+    <%= f.collection_check_boxes(:label_ids, Label.where(user_id: current_user.id).or( Label.where(user_id: nil)), :id, :name) %><br>
     <%= f.submit 'submit', class:"submit_btn"%>
   <% end %>
 </div>

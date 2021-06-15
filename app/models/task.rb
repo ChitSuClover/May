@@ -1,5 +1,6 @@
 class Task < ApplicationRecord
-  has_many :labels
+  has_many :labellings, dependent: :destroy
+  has_many :labels, through: :labellings, source: :label
   belongs_to :user
   validates :title, presence: true
   validates :content, presence: true
@@ -13,17 +14,21 @@ class Task < ApplicationRecord
     medium: 1,
     low: 2
   }
-  scope :search, ->(title, status) do
+  scope :search, ->(title, status, label) do
     @title = title
     @status = status
-    if @title.present? && @status.present?
-      where('title LIKE ?', "%#{@title}%").where(status: @status)
+    @label = label
+    if @title.present? && @status.present? && @label.present?
+      where('title LIKE ?', "%#{@title}%").where(status: @status).where(label_id: @label)
     elsif
-      @title.present? && @status.blank?
+      @title.present? && @status.blank? && @label.blank?
       where('title LIKE ?', "%#{@title}%")
     elsif
-      @status.present? && @title.blank?
+      @status.present? && @title.blank? && @label.blank?
       where(status: @status)
+    elsif
+      @label.present? && @title.blank? && @status.blank?
+      joins(:labels).where(labels: { id: @label })
     end
   end
 end

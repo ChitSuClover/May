@@ -10,6 +10,10 @@
   <%= @task.status %></p>
 <p><strong>Pripority:</strong>
   <%= @task.pripority %></p>
+<p><strong>Label:</strong>
+  <% @task.labels.each do |label| %>
+    <%= label.name %>
+  <% end %></p>
 <%= link_to 'Edit', edit_task_path(@task.id), data: {confirm: "Confirm Edit!"} , class:"link"%>
 <%= link_to 'HOME', tasks_path, class:"link"%>
 </div>

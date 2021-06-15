@@ -12,15 +12,14 @@ class TasksController < ApplicationController
     end
   end
   def search
-    if params[:title].present? || params[:status].present?
-      @tasks = Task.search(params[:title], params[:status])
+    if params[:title].present? || params[:status].present? || params[:label_id].present?
+      @tasks = Task.where(user_id: current_user.id).search(params[:title], params[:status], params[:label_id])
     else
       redirect_to tasks_path
     end
   end
   def new
     @task = Task.new
-    @label = Label.all
   end
   def create
     @task = current_user.tasks.new(task_params)
@@ -51,6 +50,6 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
   end
   def task_params
-    params.require(:task).permit(:title, :content,:expired_at, :status, :pripority, label_ids: [])
+    params.require(:task).permit(:title, :content,:expired_at, :status, :pripority, {label_ids: []})
   end
 end

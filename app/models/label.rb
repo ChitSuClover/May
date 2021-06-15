@@ -1,3 +1,4 @@
 class Label < ApplicationRecord
-  belongs_to :task, dependent: :delete
+  has_many :labellings, dependent: :destroy
+  has_many :tasks, through: :labellings, source: :task
 end
