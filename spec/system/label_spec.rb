@@ -16,8 +16,8 @@ RSpec.describe 'ラベル管理機能', type: :system do
         expect(page).to have_content 'label_test'
       end
       it 'ラベルが削除できる' do
-        user = FactoryBot.create(:user, id:2)
-        label2 = FactoryBot.create(:label, name: "label2", user_id: 2)
+        user = FactoryBot.create(:user, id:7)
+        label2 = FactoryBot.create(:label, name: "label2", user_id: 7)
         expect(label2.destroy).to be_valid
       end
     end
